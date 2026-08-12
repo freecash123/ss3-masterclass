@@ -1,1 +1,130 @@
-export const subjects=[{id:"english",name:"English Language",icon:"📖",desc:"Master grammar, comprehension, essay writing, and oral English for WAEC and NECO examinations.",color:"#3B82F6",progress:45,lessons:72,questions:500},{id:"mathematics",name:"Mathematics",icon:"🔢",desc:"Comprehensive coverage of algebra, geometry, trigonometry, statistics, and calculus for SS3.",color:"#8B5CF6",progress:60,lessons:85,questions:750},{id:"physics",name:"Physics",icon:"⚡",desc:"Explore mechanics, waves, electricity, magnetism, modern physics, and practical applications.",color:"#EF4444",progress:35,lessons:76,questions:600},{id:"chemistry",name:"Chemistry",icon:"🧪",desc:"Study organic chemistry, inorganic chemistry, physical chemistry, and practical analysis.",color:"#10B981",progress:50,lessons:80,questions:650},{id:"biology",name:"Biology",icon:"🧬",desc:"Learn genetics, ecology, evolution, human anatomy, plant biology, and practical biology.",color:"#F59E0B",progress:42,lessons:70,questions:550},{id:"economics",name:"Economics",icon:"📊",desc:"Understand microeconomics, macroeconomics, international trade, and Nigerian economic development.",color:"#EC4899",progress:30,lessons:60,questions:450},{id:"government",name:"Government",icon:"🏛️",desc:"Study political systems, Nigerian government, constitutional development, and international relations.",color:"#6366F1",progress:25,lessons:56,questions:400},{id:"civic",name:"Civic Education",icon:"🤝",desc:"Learn citizenship, human rights, democracy, rule of law, and civic responsibilities.",color:"#14B8A6",progress:55,lessons:48,questions:350},{id:"literature",name:"Literature in English",icon:"📚",desc:"Explore prose, poetry, drama, literary analysis, and recommended WAEC/NECO texts.",color:"#A855F7",progress:38,lessons:52,questions:300},{id:"agric",name:"Agricultural Science",icon:"🌾",desc:"Study crop production, animal husbandry, agricultural economics, and modern farming techniques.",color:"#84CC16",progress:20,lessons:64,questions:400},{id:"geography",name:"Geography",icon:"🌍",desc:"Learn physical geography, human geography, map reading, and regional geography of Nigeria and Africa.",color:"#06B6D4",progress:28,lessons:60,questions:380},{id:"ict",name:"Computer Studies / ICT",icon:"💻",desc:"Master computer systems, programming, data processing, networking, and digital literacy.",color:"#0EA5E9",progress:65,lessons:56,questions:420},{id:"data-processing",name:"Data Processing",icon:"🗄️",desc:"Learn database management, spreadsheet analysis, data entry, and information systems.",color:"#7C3AED",progress:15,lessons:48,questions:300},{id:"accounting",name:"Financial Accounting",icon:"💼",desc:"Study bookkeeping, financial statements, partnership accounts, and manufacturing accounts.",color:"#0891B2",progress:32,lessons:60,questions:450},{id:"commerce",name:"Commerce",icon:"🏪",desc:"Explore trade, business organizations, marketing, finance, and commercial documents.",color:"#D946EF",progress:40,lessons:56,questions:380},{id:"crs",name:"CRS",icon:"✝️",desc:"Study Christian Religious Studies covering Old Testament, New Testament, and Christian living.",color:"#F43F5E",progress:48,lessons:52,questions:350},{id:"irs",name:"IRS",icon:"☪️",desc:"Study Islamic Religious Studies covering Quran, Hadith, Islamic history, and jurisprudence.",color:"#059669",progress:10,lessons:52,questions:350},{id:"further-math",name:"Further Mathematics",icon:"📐",desc:"Advanced mathematics including complex numbers, matrices, conic sections, and differential equations.",color:"#DC2626",progress:18,lessons:68,questions:500}];const tt:Record<number,{topic:string;sub:string[]}[]>={1:[{topic:"Introduction to the Subject",sub:["Overview","Importance","Exam focus"]},{topic:"Fundamental Concepts",sub:["Basic principles","Key terminology"]},{topic:"Core Topic 1",sub:["Definition","Explanation","Examples"]},{topic:"Core Topic 2",sub:["Theory","Application"]},{topic:"Practical Session 1",sub:["Lab work","Recording"]},{topic:"Mid-Term Review",sub:["Revision","Assessment"]},{topic:"Advanced Topic 1",sub:["Detailed explanation","Exercises"]},{topic:"Advanced Topic 2",sub:["Complex problems","Practice"]},{topic:"Practical Session 2",sub:["Experiment","Analysis"]},{topic:"Integration",sub:["Connecting concepts"]},{topic:"Revision Week",sub:["Summary","Mock test"]},{topic:"Examination",sub:["First Term Exam"]}],2:[{topic:"Second Term Introduction",sub:["Overview","Goals"]},{topic:"New Topic 1",sub:["Introduction","Examples"]},{topic:"New Topic 2",sub:["Concepts","Applications"]},{topic:"New Topic 3",sub:["Detailed study","Quiz"]},{topic:"Practical Application",sub:["Project","Report"]},{topic:"Mid-Term Assessment",sub:["Review","Test"]},{topic:"Advanced Concept 1",sub:["In-depth","Practice"]},{topic:"Advanced Concept 2",sub:["Complex","Solutions"]},{topic:"Group Project",sub:["Research","Presentation"]},{topic:"WAEC/NECO Focus",sub:["Exam format","Strategy"]},{topic:"Revision and Practice",sub:["Review","Mock exam"]},{topic:"Second Term Examination",sub:["Exam","Results"]}],3:[{topic:"Third Term Overview",sub:["Final goals"]},{topic:"Final Topics 1",sub:["Core content","Practice"]},{topic:"Final Topics 2",sub:["Detailed","Exercises"]},{topic:"Final Topics 3",sub:["Advanced","Problems"]},{topic:"WAEC Preparation",sub:["Past questions","Techniques"]},{topic:"NECO Preparation",sub:["NECO topics","Practice"]},{topic:"Comprehensive Revision 1",sub:["Term 1 review"]},{topic:"Comprehensive Revision 2",sub:["Term 2 review"]},{topic:"Comprehensive Revision 3",sub:["Term 3 review"]},{topic:"Mock WAEC Exam",sub:["Full mock","Timing"]},{topic:"Final Revision",sub:["Weak areas","Intensive"]},{topic:"Final Examination",sub:["SS3 Final Exam"]}]};export function getTerms(sid:string){return[1,2,3].map(tn=>({id:`${sid}-term-${tn}`,subjectId:sid,name:tn===1?"First Term":tn===2?"Second Term":"Third Term",number:tn,weeks:tt[tn].map((w,i)=>({id:`${sid}-term-${tn}-week-${i+1}`,termId:`${sid}-term-${tn}`,number:i+1,topic:w.topic,subtopics:w.sub,duration:`${35+Math.floor(Math.random()*40)} mins`,difficulty:(["Easy","Medium","Hard"]as const)[i%3],status:(["Not Started","In Progress","Completed"]as const)[Math.min(i,2)],progress:i===0?100:i===1?65:i===2?30:0})))})}export function getLesson(sid:string,wid:string){const s=subjects.find(x=>x.id===sid);return{id:`lesson-${wid}`,subjectId:sid,termId:wid.split("-week-")[0],weekId:wid,topic:"Understanding the Core Concepts",difficulty:"Medium"as const,duration:"45 minutes",objectives:["Understand fundamental concepts","Apply concepts to solve practical problems","Identify common examination questions","Develop confidence in answering WAEC and NECO questions"],intro:`Welcome to this lesson on ${s?.name||"SS3"}. This topic is crucial for your WAEC and NECO examinations.`,simple:"This topic can be broken down into simple, easy-to-understand parts.",detailed:`This forms a fundamental part of the ${s?.name||"SS3"} curriculum. WAEC and NECO frequently test this topic.`,definitions:[{term:"Concept",def:"An abstract idea representing fundamental building blocks."},{term:"Application",def:"The practical use of theoretical knowledge to solve problems."}],concepts:["Understanding foundational principles","Recognizing patterns","Applying knowledge"],examples:[{title:"Basic Example",content:"Start with a simple scenario."},{title:"Intermediate Example",content:"Apply to a typical classroom problem."}],worked:[{q:"A typical WAEC question.",s:"Identify key concepts, explain clearly, apply with reasoning."}],formulas:[{f:"Result = Understanding × Practice",e:"Your result is proportional to understanding × practice."}],mistakes:["Rushing without understanding","Memorizing without understanding","Not practicing enough"],examTips:["Read each question carefully","Show all working steps","Manage time wisely"],waecTips:["WAEC asks 2-3 questions from this area","Practice past questions from last 5-10 years"],summary:["Essential concepts for advanced study","Regular practice is key to mastery"],related:["Related Topic 1","Related Topic 2"]}}export function getSampleQuestions(sid:string,cnt=10){return Array.from({length:cnt},(_,i)=>({id:`q-${sid}-${i+1}`,subjectId:sid,topic:`Topic ${(i%5)+1}`,difficulty:(["Easy","Medium","Hard"]as const)[i%3],type:"multiple_choice"as const,examType:(["WAEC","NECO","School","Practice"]as const)[i%4],year:2020+(i%5),question:`This is sample question ${i+1} for this subject. Which is correct?`,options:[{label:"A",text:"Option A"},{label:"B",text:"Option B"},{label:"C",text:"Option C"},{label:"D",text:"Option D"}],answer:"A",explanation:"The correct answer is A.",timeLimit:60}))}export const achievements=[{id:"first-lesson",name:"First Step",desc:"Complete your first lesson",icon:"🎓"},{id:"first-quiz",name:"Quiz Master",desc:"Complete your first quiz",icon:"📝"},{id:"first-a",name:"Excellence",desc:"Score 90%+ in a CBT test",icon:"⭐"},{id:"100-questions",name:"Centurion",desc:"Answer 100 questions",icon:"💯"},{id:"500-questions",name:"Scholar",desc:"Answer 500 questions",icon:"📚"},{id:"1000-questions",name:"Professor",desc:"Answer 1000 questions",icon:"🏆"},{id:"50-lessons",name:"Dedicated Learner",desc:"Complete 50 lessons",icon:"📖"},{id:"100-lessons",name:"Knowledge Seeker",desc:"Complete 100 lessons",icon:"🎯"},{id:"7-streak",name:"Weekly Warrior",desc:"7-day study streak",icon:"🔥"},{id:"30-streak",name:"Monthly Master",desc:"30-day study streak",icon:"💪"},{id:"subject-master",name:"Subject Master",desc:"Complete all lessons in a subject",icon:"👑"},{id:"cbt-champion",name:"CBT Champion",desc:"Complete 10 CBT exams",icon:"🏅"}];export function getFlashcards(sid:string){return Array.from({length:8},(_,i)=>({id:`fc-${sid}-${i+1}`,subjectId:sid,topic:`Topic ${(i%4)+1}`,front:`What is concept ${i+1}?`,back:`Concept ${i+1} is a fundamental principle.`,difficulty:(["Easy","Medium","Hard"]as const)[i%3]}))}export const formulas=[{subject:"Mathematics",items:[{f:"x = (−b ± √(b²−4ac)) / 2a",name:"Quadratic Formula"},{f:"A = πr²",name:"Area of Circle"},{f:"sin²θ + cos²θ = 1",name:"Pythagorean Identity"}]},{subject:"Physics",items:[{f:"F = ma",name:"Newton's Second Law"},{f:"V = IR",name:"Ohm's Law"},{f:"v = fλ",name:"Wave Equation"}]},{subject:"Chemistry",items:[{f:"n = m/M",name:"Number of Moles"},{f:"pH = −log₁₀[H⁺]",name:"pH Calculation"}]}];export const dictionary=[{term:"Photosynthesis",pron:"/ˌfəʊtəʊˈsɪnθəsɪs/",def:"The process by which green plants use sunlight to synthesize nutrients.",example:"Photosynthesis occurs in chloroplasts.",related:["Chlorophyll","Chloroplast"]},{term:"Quadratic Equation",pron:"/kwɒˈdrætɪk/",def:"A second-degree polynomial: ax² + bx + c = 0 where a ≠ 0.",example:"x² − 5x + 6 = 0 → x=2, x=3.",related:["Polynomial","Discriminant"]},{term:"Velocity",pron:"/vəˈlɒsɪti/",def:"Rate of change of displacement. A vector quantity.",example:"A car moving north at 60 km/h.",related:["Speed","Acceleration"]},{term:"Mole",pron:"/məʊl/",def:"Amount of substance with Avogadro's number (6.022×10²³).",example:"One mole of water = 18 grams.",related:["Avogadro's Number","Molar Mass"]},{term:"Osmosis",pron:"/ɒzˈməʊsɪs/",def:"Movement of water through a selectively permeable membrane.",example:"Plant roots absorb water through osmosis.",related:["Diffusion","Active Transport"]}];
+export const subjects = [
+  { id: "english", name: "English Language", icon: "📖", desc: "Master grammar, comprehension, essay writing, and oral English.", color: "#3B82F6", progress: 45, lessons: 72, questions: 500 },
+  { id: "mathematics", name: "Mathematics", icon: "🔢", desc: "Algebra, geometry, trigonometry, statistics, and calculus for SS3.", color: "#8B5CF6", progress: 60, lessons: 85, questions: 750 },
+  { id: "physics", name: "Physics", icon: "⚡", desc: "Mechanics, waves, electricity, magnetism, modern physics.", color: "#EF4444", progress: 35, lessons: 76, questions: 600 },
+  { id: "chemistry", name: "Chemistry", icon: "🧪", desc: "Organic, inorganic, physical chemistry, and practical analysis.", color: "#10B981", progress: 50, lessons: 80, questions: 650 },
+  { id: "biology", name: "Biology", icon: "🧬", desc: "Genetics, ecology, evolution, human anatomy, plant biology.", color: "#F59E0B", progress: 42, lessons: 70, questions: 550 },
+  { id: "economics", name: "Economics", icon: "📊", desc: "Microeconomics, macroeconomics, international trade.", color: "#EC4899", progress: 30, lessons: 60, questions: 450 },
+  { id: "government", name: "Government", icon: "🏛️", desc: "Political systems, Nigerian government, constitutional development.", color: "#6366F1", progress: 25, lessons: 56, questions: 400 },
+  { id: "civic", name: "Civic Education", icon: "🤝", desc: "Citizenship, human rights, democracy, rule of law.", color: "#14B8A6", progress: 55, lessons: 48, questions: 350 },
+  { id: "literature", name: "Literature in English", icon: "📚", desc: "Prose, poetry, drama, literary analysis.", color: "#A855F7", progress: 38, lessons: 52, questions: 300 },
+  { id: "agric", name: "Agricultural Science", icon: "🌾", desc: "Crop production, animal husbandry, agricultural economics.", color: "#84CC16", progress: 20, lessons: 64, questions: 400 },
+  { id: "geography", name: "Geography", icon: "🌍", desc: "Physical geography, human geography, map reading.", color: "#06B6D4", progress: 28, lessons: 60, questions: 380 },
+  { id: "ict", name: "Computer Studies / ICT", icon: "💻", desc: "Computer systems, programming, data processing, networking.", color: "#0EA5E9", progress: 65, lessons: 56, questions: 420 },
+  { id: "data-processing", name: "Data Processing", icon: "🗄️", desc: "Database management, spreadsheet analysis, data entry.", color: "#7C3AED", progress: 15, lessons: 48, questions: 300 },
+  { id: "accounting", name: "Financial Accounting", icon: "💼", desc: "Bookkeeping, financial statements, partnership accounts.", color: "#0891B2", progress: 32, lessons: 60, questions: 450 },
+  { id: "commerce", name: "Commerce", icon: "🏪", desc: "Trade, business organizations, marketing, finance.", color: "#D946EF", progress: 40, lessons: 56, questions: 380 },
+  { id: "crs", name: "CRS", icon: "✝️", desc: "Christian Religious Studies.", color: "#F43F5E", progress: 48, lessons: 52, questions: 350 },
+  { id: "irs", name: "IRS", icon: "☪️", desc: "Islamic Religious Studies.", color: "#059669", progress: 10, lessons: 52, questions: 350 },
+  { id: "further-math", name: "Further Mathematics", icon: "📐", desc: "Advanced mathematics, complex numbers, matrices.", color: "#DC2626", progress: 18, lessons: 68, questions: 500 }
+];
+
+const weekTopics = [
+  ["Introduction to the Subject", "Fundamental Concepts", "Core Topic 1", "Core Topic 2", "Practical Session 1", "Mid-Term Review", "Advanced Topic 1", "Advanced Topic 2", "Practical Session 2", "Integration", "Revision Week", "Examination"],
+  ["Second Term Introduction", "New Topic 1", "New Topic 2", "New Topic 3", "Practical Application", "Mid-Term Assessment", "Advanced Concept 1", "Advanced Concept 2", "Group Project", "WAEC/NECO Focus", "Revision and Practice", "Second Term Examination"],
+  ["Third Term Overview", "Final Topics 1", "Final Topics 2", "Final Topics 3", "WAEC Preparation", "NECO Preparation", "Comprehensive Revision 1", "Comprehensive Revision 2", "Comprehensive Revision 3", "Mock WAEC Exam", "Final Revision", "Final Examination"]
+];
+
+export function getTerms(sid) {
+  return [1, 2, 3].map(function (tn) {
+    return {
+      id: sid + "-term-" + tn,
+      subjectId: sid,
+      name: tn === 1 ? "First Term" : tn === 2 ? "Second Term" : "Third Term",
+      number: tn,
+      weeks: weekTopics[tn - 1].map(function (topic, i) {
+        return {
+          id: sid + "-term-" + tn + "-week-" + (i + 1),
+          termId: sid + "-term-" + tn,
+          number: i + 1,
+          topic: topic,
+          subtopics: ["Overview", "Key concepts", "Practice"],
+          duration: 45 + " mins",
+          difficulty: i % 3 === 0 ? "Easy" : i % 3 === 1 ? "Medium" : "Hard",
+          status: i === 0 ? "Completed" : i === 1 ? "In Progress" : "Not Started",
+          progress: i === 0 ? 100 : i === 1 ? 65 : 0
+        };
+      })
+    };
+  });
+}
+
+export function getLesson(sid, wid) {
+  var s = subjects.find(function (x) { return x.id === sid; });
+  return {
+    id: "lesson-" + wid,
+    subjectId: sid,
+    termId: wid.split("-week-")[0],
+    weekId: wid,
+    topic: "Understanding the Core Concepts",
+    difficulty: "Medium",
+    duration: "45 minutes",
+    objectives: ["Understand fundamental concepts", "Apply concepts to solve problems", "Identify exam questions", "Build confidence for WAEC and NECO"],
+    intro: "Welcome to this lesson on " + (s ? s.name : "SS3") + ". This topic is crucial for your examinations.",
+    simple: "This topic can be broken into simple, easy-to-understand parts.",
+    detailed: "WAEC and NECO frequently test this topic. Spend 2-3 hours across multiple study sessions.",
+    definitions: [{ term: "Concept", def: "An abstract idea representing building blocks." }, { term: "Application", def: "Using theoretical knowledge to solve problems." }],
+    concepts: ["Foundational principles", "Recognizing patterns", "Applying knowledge"],
+    examples: [{ title: "Basic Example", content: "Start with a simple scenario." }],
+    worked: [{ q: "A typical WAEC question.", s: "Identify concepts, explain, apply." }],
+    formulas: [{ f: "Result = Understanding × Practice", e: "Success requires both understanding and practice." }],
+    mistakes: ["Rushing without understanding", "Memorizing without understanding"],
+    examTips: ["Read carefully", "Show working steps", "Manage time"],
+    waecTips: ["WAEC asks 2-3 questions from this area", "Practice past questions"],
+    summary: ["Essential concepts", "Regular practice is key"],
+    related: ["Related Topic 1", "Related Topic 2"]
+  };
+}
+
+export function getSampleQuestions(sid, cnt) {
+  cnt = cnt || 10;
+  var qs = [];
+  for (var i = 0; i < cnt; i++) {
+    qs.push({
+      id: "q-" + sid + "-" + (i + 1),
+      subjectId: sid,
+      topic: "Topic " + ((i % 5) + 1),
+      difficulty: i % 3 === 0 ? "Easy" : i % 3 === 1 ? "Medium" : "Hard",
+      type: "multiple_choice",
+      examType: ["WAEC", "NECO", "School", "Practice"][i % 4],
+      year: 2020 + (i % 5),
+      question: "Sample question " + (i + 1) + ". Which is correct?",
+      options: [{ label: "A", text: "Option A" }, { label: "B", text: "Option B" }, { label: "C", text: "Option C" }, { label: "D", text: "Option D" }],
+      answer: "A",
+      explanation: "The correct answer is A.",
+      timeLimit: 60
+    });
+  }
+  return qs;
+}
+
+export const achievements = [
+  { id: "first-lesson", name: "First Step", desc: "Complete your first lesson", icon: "🎓" },
+  { id: "first-quiz", name: "Quiz Master", desc: "Complete your first quiz", icon: "📝" },
+  { id: "first-a", name: "Excellence", desc: "Score 90%+ in CBT", icon: "⭐" },
+  { id: "100-questions", name: "Centurion", desc: "Answer 100 questions", icon: "💯" },
+  { id: "500-questions", name: "Scholar", desc: "Answer 500 questions", icon: "📚" },
+  { id: "7-streak", name: "Weekly Warrior", desc: "7-day streak", icon: "🔥" },
+  { id: "30-streak", name: "Monthly Master", desc: "30-day streak", icon: "💪" },
+  { id: "subject-master", name: "Subject Master", desc: "Complete a subject", icon: "👑" }
+];
+
+export function getFlashcards(sid) {
+  var cards = [];
+  for (var i = 0; i < 6; i++) {
+    cards.push({ id: "fc-" + sid + "-" + (i + 1), subjectId: sid, topic: "Topic " + ((i % 3) + 1), front: "What is concept " + (i + 1) + "?", back: "Concept " + (i + 1) + " is a fundamental principle.", difficulty: "Easy" });
+  }
+  return cards;
+}
+
+export const formulas = [
+  { subject: "Mathematics", items: [{ f: "x = (−b ± √(b²−4ac)) / 2a", name: "Quadratic Formula" }, { f: "A = πr²", name: "Area of Circle" }] },
+  { subject: "Physics", items: [{ f: "F = ma", name: "Newton's Second Law" }, { f: "V = IR", name: "Ohm's Law" }] },
+  { subject: "Chemistry", items: [{ f: "n = m/M", name: "Number of Moles" }, { f: "pH = −log[H⁺]", name: "pH Calculation" }] }
+];
+
+export const dictionary = [
+  { term: "Photosynthesis", pron: "/ˌfəʊtəʊˈsɪnθəsɪs/", def: "Process by which plants use sunlight to make nutrients.", example: "Photosynthesis occurs in chloroplasts.", related: ["Chlorophyll"] },
+  { term: "Quadratic Equation", pron: "/kwɒˈdrætɪk/", def: "Second-degree polynomial: ax² + bx + c = 0.", example: "x² − 5x + 6 = 0.", related: ["Polynomial"] },
+  { term: "Velocity", pron: "/vəˈlɒsɪti/", def: "Rate of change of displacement.", example: "A car moving north at 60 km/h.", related: ["Speed"] }
+];
